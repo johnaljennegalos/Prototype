@@ -1,6 +1,18 @@
+# 1. The Virtual Environment (Heavy & useless to others)
 venv/
+.venv/
+
+# 2. The Database (Contains your local data - Keep this private!)
+db.sqlite3
+
+# 3. Python Compiled Files (Junk files)
 *.pyc
 __pycache__/
-db.sqlite3
+
+# 4. PyCharm/VSCode Settings (Your personal preferences)
 .idea/
+.vscode/
+
+# 5. OS Junk
 .DS_Store
+Thumbs.db
