@@ -24,6 +24,12 @@ class Product(models.Model):
     description = models.CharField(max_length=200, null=True)
     date_created = models.DateField(auto_now_add=True, null=True)
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.name
+
 
 class Order(models.Model):
     STATUS = (
@@ -36,3 +42,4 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     date_created = models.DateField(auto_now_add=True, null=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
+    tags = models.ManyToManyField(Tag)
