@@ -1,3 +1,5 @@
+from functools import total_ordering
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -26,5 +28,11 @@ def products(request):
     return render(request, 'accounts/products.html', {'ps': ps})
 
 
-def customer(request):
-    return render(request, 'accounts/customer.html')
+def customer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    orders = customer.order_set.all()
+
+    total_orders = orders.count()
+
+    contextlib = {'orders': orders, 'customer': customer, 'total_orders': total_orders}
+    return render(request, 'accounts/customer.html', contextlib)
