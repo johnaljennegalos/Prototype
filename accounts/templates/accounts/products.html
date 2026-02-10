@@ -19,6 +19,12 @@
                         <th>Price</th>
                     </tr>
 
+                    {% for i in ps %}
+                        <tr>
+                            <td>{{i.name}}</td>
+                        </tr>
+                    {% endfor %}
+
                     </table>
             </div>
 
