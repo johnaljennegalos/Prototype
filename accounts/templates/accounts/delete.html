@@ -2,14 +2,24 @@
 {% load static %}
 {% block content %}
 
-<p>Are you sure to delete "{{item}}"</p>
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
 
-<form action="" method="POST">
-    {% csrf_token %}
+            <p>Are you sure to delete "{{item}}"</p>
 
-    <a href="{% url 'home' %}">Cancel</a>
+            <form action="" method="POST">
+                {% csrf_token %}
 
-    <input type="submit" name="confirm">
-</form>
+                <a class="btn btn-warning" href="{% url 'home' %}">Cancel</a>
+
+                <input class="btn btn-danger" type="submit" name="confirm">
+            </form>
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
