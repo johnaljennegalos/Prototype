@@ -47,9 +47,10 @@ def createOrder(request, pk):
     # form = OrderForm(initial={'customer': customer})
     formset = OrderFormSet(instance=customer)
     if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
+        # form = OrderForm(request.POST)
+        formset = OrderFormSet(request.POST,instance=customer)
+        if formset.is_valid():
+            formset.save()
             return redirect('/')
 
     context = {'formset': formset}
