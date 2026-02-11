@@ -1,9 +1,10 @@
 from functools import total_ordering
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from accounts.models import Product, Order, Customer
+from .forms import OrderForm
 
 
 # Create your views here.
@@ -36,3 +37,15 @@ def customer(request, pk):
 
     contextlib = {'orders': orders, 'customer': customer, 'total_orders': total_orders}
     return render(request, 'accounts/customer.html', contextlib)
+
+
+def createOrder(request):
+    form = OrderForm()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'accounts/order_form.html', context)
