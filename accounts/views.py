@@ -2,8 +2,8 @@ from functools import total_ordering
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
 from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
 
 from accounts.models import Product, Order, Customer
 from .filters import OrderFilter
@@ -11,6 +11,16 @@ from .forms import OrderForm
 
 
 # Create your views here.
+
+
+def registerPage(request):
+    form = UserCreationForm()
+    context = {'form': form}
+    return render(request, 'accounts/register.html', context)
+
+def loginPage(request):
+    context = {}
+    return render(request, 'accounts/login.html', context)
 
 def home(request):
     orders = Order.objects.all()
