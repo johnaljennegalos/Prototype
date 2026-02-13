@@ -6,6 +6,8 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
+from django.contrib.auth.decorators import login_required
+
 from django.contrib import messages
 
 from accounts.models import Product, Order, Customer
@@ -51,6 +53,8 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+
+@login_required(login_url='login')
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
