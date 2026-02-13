@@ -25,3 +25,17 @@ def allowed_users(allowed_roles=[]):
 
         return wrapper_func
     return decorator
+
+def admin_only(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        groups = None
+        if request.user.groups.exists():
+            groups = request.user.groups.all()[0].name
+
+        if groups == 'customer':
+            return redirect('user-page')
+
+        if groups == 'admin':
+            return redirect('home')
+
+    return wrapper_func

@@ -13,7 +13,7 @@ from django.contrib import messages
 from accounts.models import Product, Order, Customer
 from .filters import OrderFilter
 from .forms import OrderForm, CreateUserForm
-from .decorators import unauthenticated_user,allowed_users
+from .decorators import unauthenticated_user,allowed_users, admin_only
 
 
 # Create your views here.
@@ -55,7 +55,7 @@ def logoutUser(request):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
+@admin_only
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
