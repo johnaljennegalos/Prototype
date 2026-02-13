@@ -70,11 +70,13 @@ def home(request):
 
     return render(request, 'accounts/dashboard.html', context)
 
+
+@login_required(login_url='login')
 def products(request):
     ps = Product.objects.all()
     return render(request, 'accounts/products.html', {'ps': ps})
 
-
+@login_required(login_url='login')
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)
 
@@ -87,7 +89,7 @@ def customer(request, pk):
     contextlib = {'orders': orders, 'customer': customer, 'total_orders': total_orders, 'myFilter': myFilter}
     return render(request, 'accounts/customer.html', contextlib)
 
-
+@login_required(login_url='login')
 def createOrder(request, pk):
     OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10)
     customer = Customer.objects.get(id=pk)
@@ -103,6 +105,7 @@ def createOrder(request, pk):
     context = {'formset': formset}
     return render(request, 'accounts/order_form.html', context)
 
+@login_required(login_url='login')
 def updateOrder(request, pk):
     order = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
@@ -115,6 +118,7 @@ def updateOrder(request, pk):
     context = {'form': form}
     return render(request, 'accounts/order_form.html', context)
 
+@login_required(login_url='login')
 def deleteOrder(request, pk):
     order = Order.objects.get(id=pk)
     if request.method == 'POST':
