@@ -14,7 +14,7 @@ from django.contrib import messages
 
 from accounts.models import Product, Order, Customer
 from .filters import OrderFilter
-from .forms import OrderForm, CreateUserForm
+from .forms import OrderForm, CreateUserForm, CustomerForm
 from .decorators import unauthenticated_user,allowed_users, admin_only
 
 
@@ -95,7 +95,9 @@ def userPage(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['customer'])
 def accountSettings(request):
-    context = {}
+    user = request.user
+    form = CustomerForm(instance=user)
+    context = {'form':form}
     return render(request, 'accounts/account_settings.html', context)
 
 
