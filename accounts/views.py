@@ -95,8 +95,8 @@ def userPage(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['customer'])
 def accountSettings(request):
-    user = request.user
-    form = CustomerForm(instance=user)
+    customer = request.user.customer
+    form = CustomerForm(instance=customer)
     context = {'form':form}
     return render(request, 'accounts/account_settings.html', context)
 
