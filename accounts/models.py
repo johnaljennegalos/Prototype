@@ -8,10 +8,11 @@ class Customer(models.Model):
     name = models.CharField(max_length=100, null=True)
     email = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=100, null=True)
+    profile_pic = models.ImageField(null=True, blank=True)
     date_created = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.name or "Unnamed Customer"
 
 class Tag(models.Model):
     name = models.CharField(max_length=100, null=True)
