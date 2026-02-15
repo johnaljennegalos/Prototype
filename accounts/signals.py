@@ -9,8 +9,8 @@ def customer_profile(sender, instance, created, **kwargs):
         instance.groups.add(group)
 
         Customer.objects.create(
-            user=user,
-            name=user.username,
+            user=instance,
+            name=instance.username,
         )
 
         print("customer created")
